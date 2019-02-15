@@ -20,8 +20,12 @@ from sklearn.metrics import classification_report
 from sklearn.model_selection import train_test_split
 
 # 数据路径
-data_dir = '/opt/data/kaggle/getting-started/digit-recognizer/'
+datasets_path = "C:/Users/ezjinfe/datasets"
 
+data_dir = '{}/getting-started/digit-recognizer/'.format(datasets_path)
+output_path = os.path.join(data_dir, 'output')
+if not os.path.exists(output_path):
+    os.makedirs(output_path)
 
 # 加载数据
 def opencsv():
@@ -71,6 +75,7 @@ def trainModel(trainData, trainLabel):
 
 # 结果输出保存
 def saveResult(result, csvName):
+
     with open(csvName, 'w') as myFile:
         myWriter = csv.writer(myFile)
         myWriter.writerow(["ImageId", "Label"])
@@ -203,6 +208,8 @@ def trainDRSVM():
 def preDRSVM():
     startTime = time.time()
     # 加载模型和数据
+
+
     optimalSVMClf = getModel(os.path.join(data_dir, 'output/Result_sklearn_SVM.model'))
     pcaPreData = getModel(os.path.join(data_dir, 'output/Result_sklearn_SVM.pcaPreData'))
 
@@ -225,7 +232,10 @@ def dataVisulization(data, labels):
     fig = plt.figure()
     ax = fig.add_subplot(1, 1, 1)
     for cClass in uniqueClasses:
-        plt.scatter(pcaData[labels==cClass, 0], pcaData[labels==cClass, 1])
+        sc = plt.scatter(pcaData[labels==cClass, 0], pcaData[labels==cClass, 1])
+        # plt.axis([-3, 3, -3, 3])
+        # plt.text(2.5,2.5,str(cClass))
+        # plt.show()
     plt.xlabel('$x_1$')
     plt.ylabel('$x_2$')
     plt.title('MNIST visualization')
@@ -238,7 +248,7 @@ if __name__ == '__main__':
 
 
     # 训练并保存模型
-    #trainDRSVM()
+    trainDRSVM()
 
     # 分析数据
     #analyse_data(trainData)
