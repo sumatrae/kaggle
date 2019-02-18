@@ -68,7 +68,7 @@ def dRCsv(x_train, x_test, preData, COMPONENT_NUM):
 # 训练模型
 def trainModel(trainData, trainLabel):
     print('Train SVM...')
-    svmClf = SVC(C=4, kernel='rbf')
+    svmClf = SVC(C=9, kernel='rbf')
     svmClf.fit(trainData, trainLabel)  # 训练SVM
     return svmClf
 
