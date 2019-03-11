@@ -22,7 +22,12 @@ import os
 np.random.seed(2)
 
 # 数据路径
-data_dir = '/media/wsw/B634091A3408DF6D/data/kaggle/datasets/getting-started/digit-recognizer/'
+datasets_path = "C:/Users/ezjinfe/datasets"
+
+data_dir = '{}/getting-started/digit-recognizer/'.format(datasets_path)
+output_path = os.path.join(data_dir, 'output')
+if not os.path.exists(output_path):
+    os.makedirs(output_path)
 
 # Load the data
 train = pd.read_csv(os.path.join(data_dir, 'input/train.csv'))
@@ -89,7 +94,7 @@ optimizer = RMSprop(lr=0.001, rho=0.9, epsilon=1e-08, decay=0.0)
 model.compile(
     optimizer=optimizer, loss="categorical_crossentropy", metrics=["accuracy"])
 
-epochs = 30
+epochs = 1
 batch_size = 86
 
 # Set a learning rate annealer
@@ -132,5 +137,5 @@ submission = pd.concat(
     [pd.Series(
         range(1, 28001), name="ImageId"), results], axis=1)
 
-submission.to_csv(os.path.join(data_dir, "output/Result_keras_CNN.csv",index=False))
+submission.to_csv(os.path.join(data_dir, "output/Result_keras_CNN.csv"),index=False)
 print('finished')

@@ -75,8 +75,9 @@ def trainModel(trainData, trainLabel):
 
 # 结果输出保存
 def saveResult(result, csvName):
-
-    with open(csvName, 'w') as myFile:
+    with open(csvName, 'w', newline='') as myFile: #newline='' suppresses text mode newline handling. On Windows,
+                                                   # failing to do this will write \r\r\n file line endings instead
+                                                   # of the correct \r\n, 因此会出现多一行的线性
         myWriter = csv.writer(myFile)
         myWriter.writerow(["ImageId", "Label"])
         index = 0
@@ -243,14 +244,14 @@ def dataVisulization(data, labels):
 
 
 if __name__ == '__main__':
-    trainData, trainLabel, preData = opencsv()
-    dataVisulization(trainData, trainLabel)
+    #trainData, trainLabel, preData = opencsv()
+    #dataVisulization(trainData, trainLabel)
 
 
     # 训练并保存模型
-    trainDRSVM()
+    #trainDRSVM()
 
     # 分析数据
     #analyse_data(trainData)
     # 加载预测数据集
-    #preDRSVM()
+    preDRSVM()

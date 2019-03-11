@@ -15,8 +15,12 @@ import pandas as pd
 from sklearn.decomposition import PCA
 from sklearn.neighbors import KNeighborsClassifier
 
-data_dir = '/opt/data/kaggle/getting-started/digit-recognizer/'
+datasets_path = "C:/Users/ezjinfe/datasets"
 
+data_dir = '{}/getting-started/digit-recognizer/'.format(datasets_path)
+output_path = os.path.join(data_dir, 'output')
+if not os.path.exists(output_path):
+    os.makedirs(output_path)
 
 # 加载数据
 def opencsv():

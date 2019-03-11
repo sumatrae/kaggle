@@ -19,7 +19,12 @@ import os.path
 import time
 
 # 数据路径
-data_dir = '/Users/wuyanxue/Documents/GitHub/datasets/getting-started/digit-recognizer/'
+datasets_path = "C:/Users/ezjinfe/datasets"
+
+data_dir = '{}/getting-started/digit-recognizer/'.format(datasets_path)
+output_path = os.path.join(data_dir, 'output')
+if not os.path.exists(output_path):
+    os.makedirs(output_path)
 
 # 加载数据
 def opencsv():
@@ -126,8 +131,8 @@ def trainRF():
     rfClf = trainModel(X_train, y_train)
 
     # 保存结果
-    storeModel(data_pca[len(train_data):], os.path.join(data_dir, 'output/Result_sklearn_rf.pcaPreData'))
-    storeModel(rfClf, os.path.join(data_dir, 'output/Result_sklearn_rf.model'))
+    storeModel(data_pca[len(train_data):], os.path.join(output_path, 'Result_sklearn_rf.pcaPreData'))
+    storeModel(rfClf, os.path.join(output_path, 'Result_sklearn_rf.model'))
 
     # 模型准确率
     y_predict = rfClf.predict(X_test)
